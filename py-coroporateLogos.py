@@ -68,14 +68,13 @@ for c in companyInfoIndexed:
 		for imgSize in BASE_IMG_SIZE:
 			imgURL = BASE_IMG_URL.format(companyName, imgSize)
 			imgFile = ''.join([companyName, '_', imgSize, '.jpg'])
-			try:
-				jpgfile = requests.get(imgURL).content
+			jpgfile = requests.get(imgURL)
+			if jpgfile.status_code == 200:
 				with open(imgPath + imgFile, 'wb') as f:
-					f.write(jpgfile)
-					print 'Successfully downloaded {0}'.format(jpgfile)
-			except:
+					f.write(jpgfile.content)
+					print 'Successfully downloaded {0}'.format(imgFile)
+			else:
 				print 'Error downloading {0}'.format(imgFile)
-				pass
 
 # extract company info (name, htmlName, sales, profits, assets, marketValue, country) from htmlblock
 
