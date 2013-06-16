@@ -69,7 +69,7 @@ for c in companyInfoIndexed:
 			imgURL = BASE_IMG_URL.format(companyName, imgSize)
 			imgFile = ''.join([companyName, '_', imgSize, '.jpg'])
 			try:
-				jpgfile = requests.get(imgURL).text
+				jpgfile = requests.get(imgURL).content
 				with open(imgPath + imgFile, 'wb') as f:
 					f.write(jpgfile)
 					print 'Successfully downloaded {0}'.format(jpgfile)
